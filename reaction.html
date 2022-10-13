@@ -18,30 +18,30 @@
     <p id="target"></p>
 
     <script>
-        let myTime = undefined
+        var myTime = Date.now()
         function recordReact() {
             myTime = Date.now()
             console.log(myTime)
         }
+    </script>
+        <script>
         function startTime() {
-            for (let index = 0; index < 4; index++) {
+            // BONUS
+            let countdown = Math.floor(Math.random() * 9) + 2
+            console.log()
+            for (let i = 0; i < countdown; i++) {
                 setTimeout(() => {
-                    document.getElementById('countdown').innerHTML = index
-                }, (3 - index) * 1000)
-
+                    document.getElementById("countdown").innerHTML = i
+                }, ((countdown - 1 - i) * 1000));
             }
-
             setTimeout(() => {
                 if (myTime == undefined) {
-                    document.getElementById('target').innerHTML = "Too Slow"
-
+                    document.getElementById("target").innerHTML = "Too Slow"
                 } else {
-                    let currentTime = Date.now()
-                    let difference = Math.abs(currentTime - myTime)
-                    document.getElementById('target').innerHTML = "Time was " + difference
+                    let buttonTime = Date.now()
+                    document.getElementById("target").innerHTML = "Time was " + (buttonTime - myTime)
                 }
-
-            }, 3000)
+            }, 3000);
         }
     </script>
 

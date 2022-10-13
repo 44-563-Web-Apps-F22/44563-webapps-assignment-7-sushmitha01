@@ -23,35 +23,71 @@
 	}
 </style></head>
 <body>
-    <h1>sushmitha yelamakonda builds a cycler</h1>
-    <input type="text" id="textID">
-    <br/>
-    <br/>
-    <div class="flex-container" id="target">
-        <div class="cycler">row item 1</div>
-        <div class="cycler">row item 2</div>
-        <div class="cycler">row item 3</div>
-    </div>
-   
-
-    <p> Press the button to create an new element of type div and then add it to the container.
-    </p>
-    <button onclick="makeNewDiv()">Add value</button>
-    <button onclick="get()">Get</button>
-    <button onclick="spin()">Spin</button>
-
-    <script>
-        function makeNewDiv(){
-            /* make the div and its text */
+	<div class="container text-center">
+        <div class="container-fluid p-5 bg-warning text-black text-center">
+            <h1>Yelamakonda Sushmitha builds a cycler</h1>
+        </div><br>
+        <div class="flex-container" id="target">
+            <div class="cycler">row item 1</div>   
+            <div class="cycler">row item 2</div>  
+            <div class="cycler">row item 3</div>  
+        </div><br>
+        <label for="inputElement">Type something: <br></label>
+        <input class="form-control" type="text" name="input" id="inputElement" value="">
+        <br>
+        <p class="message"> 
+            Press the button to create an new element of type div and then add it to the container.
+        </p>
+        <div class="container text-center">
+            <button class="btn btn-warning" type="submit" onclick="makeNewDiv()">Add Value</button>
+            <button class="btn btn-danger" type="submit" onclick="get()">Get</button>
+            <button class="btn btn-success" type="submit" onclick="spin()">Spin</button>
+            <button class="btn btn-primary" type="submit" onclick="swap()">Swap</button>
+        </div>
+    </div>	
+	<script>
+        function makeNewDiv() {
             let element = document.createElement("div")
-            element.innerHTML = "an item after 3"
-            element.style.color = "orange"
-    
-            /* add it to the container */
-            let container = document.getElementById('target')
+            let value = document.getElementById("inputElement").value
+
+            element.innerHTML = value
+            element.className = "cycler"
+
+            let container = document.getElementById("target")
             container.appendChild(element)
-            
         }
     </script>
+    <script>
+        function get() {
+       let cyclerItems  = document.getElementsByClassName('cycler')
+       if(cyclerItems.length > 0){
+            cyclerItems[cyclerItems.length - 1].remove()
+       }
+
+    }
+
+    function spin() {
+            let cyclerItems = document.getElementsByClassName("cycler")
+            if(cyclerItems.length > 1) {
+                removedItem = cyclerItems[cyclerItems.length-1]
+                cyclerItems[cyclerItems.length-1].remove()
+                let container = document.getElementById("target")
+                container.insertBefore(removedItem, container.firstChild)
+            }
+        }
+    function swap() {
+                let cyclerItems = document.getElementsByClassName("cycler")
+                let container = document.getElementById("target")
+                let a = Math.floor(Math.random() * cyclerItems.length)
+                let b = Math.floor(Math.random() * cyclerItems.length)
+                let firstInnerText = document.getElementsByClassName("cycler")[a]
+                let secondInnerText = document.getElementsByClassName("cycler")[b]
+                if(cyclerItems.length > 1) {
+                    let temp = firstInnerText.innerHTML
+                    firstInnerText.innerHTML = secondInnerText.innerHTML
+                    secondInnerText.innerHTML = temp
+                }
+            }  
+</script>
 </body>
 </html>	
